@@ -42,6 +42,8 @@
 #pragma mark Properties
 
 @synthesize delegate;
+@synthesize mainToolbar;
+@synthesize document;
 
 #pragma mark Support methods
 
@@ -250,6 +252,13 @@
 
 		currentPage = page; // Track current page number
 	}
+
+	if ([self.delegate respondsToSelector:@selector(readerViewController:didShowContentView:)]) {
+		// Page number key
+		NSNumber *key = [NSNumber numberWithInteger:page]; 
+		ReaderContentView *contentView = [contentViews objectForKey:key];
+		[self.delegate readerViewController:self didShowContentView:contentView];
+	}
 }
 
 - (void)showDocument:(id)object
@@ -287,7 +296,7 @@
 
 			[notificationCenter addObserver:self selector:@selector(applicationWill:) name:UIApplicationWillResignActiveNotification object:nil];
 
-			[object updateProperties]; document = [object retain]; // Retain the supplied ReaderDocument object for our use
+			[object updateProperties]; self.document = object; // Retain the supplied ReaderDocument object for our use
 
 			[ReaderThumbCache touchThumbCacheWithGUID:object.guid]; // Touch the document thumb cache directory
 
@@ -344,11 +353,11 @@
 	CGRect toolbarRect = viewRect;
 	toolbarRect.size.height = TOOLBAR_HEIGHT;
 
-	mainToolbar = [[ReaderMainToolbar alloc] initWithFrame:toolbarRect document:document]; // At top
+	self.mainToolbar = [[ReaderMainToolbar alloc] initWithFrame:toolbarRect document:document]; // At top
 
-	mainToolbar.delegate = self;
+	self.mainToolbar.delegate = self;
 
-	[self.view addSubview:mainToolbar];
+	[self.view addSubview:self.mainToolbar];
 
 	CGRect pagebarRect = viewRect;
 	pagebarRect.size.height = PAGEBAR_HEIGHT;

@@ -48,6 +48,7 @@
 #pragma mark Properties
 
 @synthesize message;
+@synthesize theContentView;
 
 #pragma mark ReaderContentView functions
 
@@ -94,7 +95,7 @@ static inline CGFloat ZoomScaleThatFits(CGSize target, CGSize source)
 		self.bouncesZoom = YES;
 		self.delegate = self;
 
-		theContentView = [[ReaderContentPage alloc] initWithURL:fileURL page:page password:phrase];
+		self.theContentView = [[ReaderContentPage alloc] initWithURL:fileURL page:page password:phrase];
 
 		if (theContentView != nil) // Must have a valid and initialized content view
 		{
@@ -306,22 +307,36 @@ static inline CGFloat ZoomScaleThatFits(CGSize target, CGSize source)
 {
 	[super touchesBegan:touches withEvent:event]; // Message superclass
 
-	[message contentView:self touchesBegan:touches]; // Message delegate
+	if ([message respondsToSelector:@selector(contentView:touchesBegan:)]) {
+		[message contentView:self touchesBegan:touches]; // Message delegate
+	}
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
 {
 	[super touchesCancelled:touches withEvent:event]; // Message superclass
+
+	if ([message respondsToSelector:@selector(contentView:touchesCancelled:)]) {
+		[message contentView:self touchesCancelled:touches]; // Message delegate
+	}
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
 	[super touchesEnded:touches withEvent:event]; // Message superclass
+
+	if ([message respondsToSelector:@selector(contentView:touchesEnded:)]) {
+		[message contentView:self touchesEnded:touches]; // Message delegate
+	}
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
 	[super touchesMoved:touches withEvent:event]; // Message superclass
+
+	if ([message respondsToSelector:@selector(contentView:touchesMoved:)]) {
+		[message contentView:self touchesMoved:touches]; // Message delegate
+	}
 }
 
 @end

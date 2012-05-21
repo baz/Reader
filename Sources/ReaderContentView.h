@@ -34,8 +34,11 @@
 @protocol ReaderContentViewDelegate <NSObject>
 
 @required // Delegate protocols
-
 - (void)contentView:(ReaderContentView *)contentView touchesBegan:(NSSet *)touches;
+@optional
+- (void)contentView:(ReaderContentView *)contentView touchesCancelled:(NSSet *)touches;
+- (void)contentView:(ReaderContentView *)contentView touchesEnded:(NSSet *)touches;
+- (void)contentView:(ReaderContentView *)contentView touchesMoved:(NSSet *)touches;
 
 @end
 
@@ -53,6 +56,7 @@
 }
 
 @property (nonatomic, assign, readwrite) id <ReaderContentViewDelegate> message;
+@property (nonatomic, strong) ReaderContentPage *theContentView;
 
 - (id)initWithFrame:(CGRect)frame fileURL:(NSURL *)fileURL page:(NSUInteger)page password:(NSString *)phrase;
 
