@@ -76,5 +76,6 @@
 - (id)initWithReaderDocument:(ReaderDocument *)object;
 - (void)handleSingleTap:(UITapGestureRecognizer *)recognizer;
 - (ReaderDocument *)readerDocument;
+- (ReaderMainToolbar *)topToolbar;
 
 @end

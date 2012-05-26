@@ -645,6 +645,10 @@
 	return document;
 }
 
+- (ReaderMainToolbar *)topToolbar {
+	return mainToolbar;
+}
+
 - (void)handleSingleTap:(UITapGestureRecognizer *)recognizer
 {
 #ifdef DEBUGX
