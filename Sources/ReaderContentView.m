@@ -320,7 +320,7 @@ static inline CGFloat ZoomScaleThatFits(CGSize target, CGSize source)
 	[super touchesCancelled:touches withEvent:event]; // Message superclass
 
 	if ([message respondsToSelector:@selector(contentView:touchesCancelled:)]) {
-		[message contentView:self touchesBegan:touches];
+		[message contentView:self touchesCancelled:touches];
 	}
 }
 
@@ -329,7 +329,7 @@ static inline CGFloat ZoomScaleThatFits(CGSize target, CGSize source)
 	[super touchesEnded:touches withEvent:event]; // Message superclass
 
 	if ([message respondsToSelector:@selector(contentView:touchesEnded:)]) {
-		[message contentView:self touchesBegan:touches];
+		[message contentView:self touchesEnded:touches];
 	}
 }
 
@@ -338,7 +338,7 @@ static inline CGFloat ZoomScaleThatFits(CGSize target, CGSize source)
 	[super touchesMoved:touches withEvent:event]; // Message superclass
 
 	if ([message respondsToSelector:@selector(contentView:touchesMoved:)]) {
-		[message contentView:self touchesBegan:touches];
+		[message contentView:self touchesMoved:touches];
 	}
 }
 
