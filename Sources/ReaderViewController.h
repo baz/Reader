@@ -40,6 +40,7 @@
 @optional // Delegate protocols
 
 - (void)dismissReaderViewController:(ReaderViewController *)viewController;
+- (void)readerViewController:(ReaderViewController *)readerController didShowContentView:(ReaderContentView *)contentView;
 
 @end
 
@@ -73,5 +74,7 @@
 @property (nonatomic, assign, readwrite) id <ReaderViewControllerDelegate> delegate;
 
 - (id)initWithReaderDocument:(ReaderDocument *)object;
+- (void)handleSingleTap:(UITapGestureRecognizer *)recognizer;
+- (ReaderDocument *)readerDocument;
 
 @end

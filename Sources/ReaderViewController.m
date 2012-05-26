@@ -249,6 +249,13 @@
 		[self updateToolbarBookmarkIcon]; // Update bookmark
 
 		currentPage = page; // Track current page number
+
+		if ([self.delegate respondsToSelector:@selector(readerViewController:didShowContentView:)]) {
+			// Page number key
+			NSNumber *key = [NSNumber numberWithInteger:page]; 
+			ReaderContentView *contentView = [contentViews objectForKey:key];
+			[self.delegate readerViewController:self didShowContentView:contentView];
+		}
 	}
 }
 
@@ -632,6 +639,10 @@
 			theScrollView.tag = (page + 1); // Increment page number
 		}
 	}
+}
+
+- (ReaderDocument *)readerDocument {
+	return document;
 }
 
 - (void)handleSingleTap:(UITapGestureRecognizer *)recognizer

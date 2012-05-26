@@ -206,6 +206,10 @@ static inline CGFloat ZoomScaleThatFits(CGSize target, CGSize source)
 	}
 }
 
+- (ReaderContentPage *)contentPage {
+	return theContentView;
+}
+
 - (void)layoutSubviews
 {
 #ifdef DEBUGX
@@ -306,22 +310,36 @@ static inline CGFloat ZoomScaleThatFits(CGSize target, CGSize source)
 {
 	[super touchesBegan:touches withEvent:event]; // Message superclass
 
-	[message contentView:self touchesBegan:touches]; // Message delegate
+	if ([message respondsToSelector:@selector(contentView:touchesBegan:)]) {
+		[message contentView:self touchesBegan:touches];
+	}
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
 {
 	[super touchesCancelled:touches withEvent:event]; // Message superclass
+
+	if ([message respondsToSelector:@selector(contentView:touchesCancelled:)]) {
+		[message contentView:self touchesBegan:touches];
+	}
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
 	[super touchesEnded:touches withEvent:event]; // Message superclass
+
+	if ([message respondsToSelector:@selector(contentView:touchesEnded:)]) {
+		[message contentView:self touchesBegan:touches];
+	}
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
 	[super touchesMoved:touches withEvent:event]; // Message superclass
+
+	if ([message respondsToSelector:@selector(contentView:touchesMoved:)]) {
+		[message contentView:self touchesBegan:touches];
+	}
 }
 
 @end

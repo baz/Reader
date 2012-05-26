@@ -37,6 +37,11 @@
 
 - (void)contentView:(ReaderContentView *)contentView touchesBegan:(NSSet *)touches;
 
+@optional
+- (void)contentView:(ReaderContentView *)contentView touchesCancelled:(NSSet *)touches;
+- (void)contentView:(ReaderContentView *)contentView touchesEnded:(NSSet *)touches;
+- (void)contentView:(ReaderContentView *)contentView touchesMoved:(NSSet *)touches;
+
 @end
 
 @interface ReaderContentView : UIScrollView <UIScrollViewDelegate>
@@ -59,6 +64,8 @@
 - (void)showPageThumb:(NSURL *)fileURL page:(NSInteger)page password:(NSString *)phrase guid:(NSString *)guid;
 
 - (id)singleTap:(UITapGestureRecognizer *)recognizer;
+
+- (ReaderContentPage *)contentPage;
 
 - (void)zoomIncrement;
 - (void)zoomDecrement;
