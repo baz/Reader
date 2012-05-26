@@ -553,6 +553,14 @@
 	[super dealloc];
 }
 
+- (CGPDFPageRef)PDFPage {
+	return _PDFPageRef;
+}
+
+- (CGSize)pageSize {
+	return CGSizeMake(_pageWidth, _pageHeight);
+}
+
 #if (READER_DISABLE_RETINA == TRUE) // Option
 
 - (void)didMoveToWindow

@@ -47,6 +47,10 @@
 
 - (id)singleTap:(UITapGestureRecognizer *)recognizer;
 
+- (CGPDFPageRef)PDFPage;
+
+- (CGSize)pageSize;
+
 @end
 
 #pragma mark -
